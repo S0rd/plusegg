@@ -1,6 +1,5 @@
 #!/bin/bash
 
-plugins_dir="/mnt/server/plugins"
 mkdir -p "$plugins_dir"
 cd "$plugins_dir"
 
