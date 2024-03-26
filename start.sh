@@ -1,5 +1,6 @@
 #!/bin/bash
 
+plugins_dir="plugins"
 mkdir -p "$plugins_dir"
 cd "$plugins_dir"
 
