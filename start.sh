@@ -24,4 +24,4 @@ fi
 echo "THIS SYSTEM IS RUNNING BY SPARIXXNODES!"
 # Run Java command
 cd ..
-java -Xms128M -XX:MaxRAMPercentage=95.0 -Dterminal.jline=false -Dterminal.ansi=true -jar server.jar
+java -Xms128M -XX:MaxRAMPercentage=95.0 -Dterminal.jline=false -Dterminal.ansi=true -DIBM_HEAPDUMP=disabled -DIBM_JAVACOREDIR=disabled -jar server.jar
