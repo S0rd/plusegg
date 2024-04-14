@@ -33,4 +33,4 @@ fi
 echo "THIS SYSTEM IS RUNNING BY SPARIXXNODES!"
 # Run Java command
 cd ..
-java -Xms8192M -Xmx8192M -XX:MaxRAMPercentage=95.0 -Dterminal.jline=false -Dterminal.ansi=true -DIBM_HEAPDUMP=disabled -DIBM_JAVACOREDIR=disabled -XX:+UseG1GC -XX:MaxGCPauseMillis=500 -XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap -jar server.jar
+java -Xms8192M -Xmx8192M -XX:MaxRAMPercentage=95.0 -Dterminal.jline=false -Dterminal.ansi=true -XX:+UseG1GC -XX:MaxGCPauseMillis=500 -XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap -XX:OnErrorMode=None -DIBM_HEAPDUMP=disabled -DIBM_JAVACOREDIR= -XX:-CreateCoredumpOnCrash -jar server.jar
