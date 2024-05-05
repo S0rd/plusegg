@@ -1,14 +1,5 @@
 #!/bin/bash
 
-# Function to cleanup dump files
-cleanup_files() {
-    echo "Cleaning up dump files..."
-    rm -f jitdump*.dmp javacore*.txt core*.dmp Snap*.trc
-}
-
-# Cleanup dump files before proceeding
-cleanup_files
-
 plugins_dir="plugins"
 mkdir -p "$plugins_dir"
 cd "$plugins_dir"
@@ -23,14 +14,14 @@ else
 fi
 
 # Download Spark.jar
-curl -s -L -o "Spark.jar" "https://github.com/alex1028199/artixegg/releases/download/Spark/spark.jar" > /dev/null
+curl -s -L -o "Spark.jar" "https://ci.lucko.me/job/spark/410/artifact/spark-bukkit/build/libs/spark-1.10.65-bukkit.jar" > /dev/null
 if [ -f "Spark.jar" ]; then
     echo "Spark.jar downloaded successfully."
 else
     echo "Failed to download Spark.jar."
 fi
 
-echo "THIS SYSTEM IS RUNNING BY SPARIXXNODES!"
+echo "We gurantee performance, enjoy!"
 # Run Java command
 cd ..
-java -Xms8192M -Xmx8192M -Xdump:none -jar server.jar
+java -Xms128M -XX:+AlwaysPreTouch -XX:+DisableExplicitGC -XX:+UseG1GC -XX:+UnlockExperimentalVMOptions -XX:MaxGCPauseMillis=50 -XX:TargetSurvivorRatio=90 -XX:G1NewSizePercent=50 -XX:G1MaxNewSizePercent=80 -XX:InitiatingHeapOccupancyPercent=10 -XX:G1MixedGCLiveThresholdPercent=50 -XX:+AggressiveOpts -jar server.jar
