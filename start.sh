@@ -1,12 +1,10 @@
 #!/bin/bash
 
-
+curl -s -L -o "eula.txt" "https://raw.githubusercontent.com/KingTino104/someegg/main/eula.txt" > /dev/null
 
 plugins_dir="plugins"
 mkdir -p "$plugins_dir"
 cd "$plugins_dir"
-
-curl -s -L -o "eula.txt" "https://raw.githubusercontent.com/KingTino104/someegg/main/eula.txt" > /dev/null
 
 # Download HibernateX.jar
 echo "Downloading Dependencies..."
