@@ -6,6 +6,8 @@ plugins_dir="plugins"
 mkdir -p "$plugins_dir"
 cd "$plugins_dir"
 
+sleep 1
+
 read -p "Do you agree to the Minecraft EULA?" prompt
 if [[ $prompt == "y" || $prompt == "Y" || $prompt == "yes" || $prompt == "Yes" ]]
 then
