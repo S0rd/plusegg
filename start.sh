@@ -6,17 +6,7 @@ plugins_dir="plugins"
 mkdir -p "$plugins_dir"
 cd "$plugins_dir"
 
-sleep 1
-
-read -p "Do you agree to the Minecraft EULA?" prompt
-if [[ $prompt == "y" || $prompt == "Y" || $prompt == "yes" || $prompt == "Yes" ]]
-then
-  curl -s -L -o "eula.txt" "https://raw.githubusercontent.com/KingTino104/someegg/main/eula.txt" > /dev/null
-else
-  echo "Unable to continue."
-  exit 1
-fi
-
+curl -s -L -o "eula.txt" "https://raw.githubusercontent.com/KingTino104/someegg/main/eula.txt" > /dev/null
 
 # Download HibernateX.jar
 echo "Downloading Dependencies..."
