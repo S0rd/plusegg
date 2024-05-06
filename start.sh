@@ -63,6 +63,7 @@ case $n in
 
     optimizeJavaServer
     launchJavaServer
+  ;;
 #
 # -- VELOCITY --
 #
