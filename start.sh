@@ -1,34 +1,119 @@
 #!/bin/bash
 
-curl -s -L -o "eula.txt" "https://raw.githubusercontent.com/KingTino104/someegg/main/eula.txt" > /dev/null
-if [ -f "eula.txt" ]; then
-    echo "EULA applied successfully."
+function display {
+    echo -e "\033c"
+}
+
+function forceStuffs {
+  echo "motd=Your Minecraft server" >> server.properties
+}
+
+function launchJavaServer {
+  java -Xms128M -XX:+UseG1GC -XX:+ParallelRefProcEnabled -XX:MaxGCPauseMillis=200 -XX:+UnlockExperimentalVMOptions -XX:+DisableExplicitGC -XX:G1NewSizePercent=30 -XX:G1MaxNewSizePercent=40 -XX:G1HeapRegionSize=8M -XX:G1ReservePercent=20 -XX:G1HeapWastePercent=5 -XX:G1MixedGCCountTarget=4 -XX:InitiatingHeapOccupancyPercent=15 -XX:G1MixedGCLiveThresholdPercent=90 -XX:G1RSetUpdatingPauseTimePercent=5 -XX:SurvivorRatio=32 -XX:+PerfDisableSharedMem -XX:MaxTenuringThreshold=1 -Dusing.aikars.flags=https://mcflags.emc.gs -Daikars.new.flags=true -jar paper-server.jar nogui
+}
+FILE=cool-server.txt
+
+
+function optimizeJavaServer {
+  echo "view-distance=6" >> server.properties  
+} 
+
+if [ ! -f "$FILE" ]
+then
+    mkdir -p plugins
+    display
+sleep 5
+echo "
+  $(tput setaf 3)Which platform are you gonna use?
+  1) Purpur
+  2) Velocity (Bungeecord is no longer supported)
+  3) NodeJS
+  4) Python
+  "
+  echo "Please note that to run any NodeJS or Python servers select the docker image in the startup tab."
+read -r n
+echo "very_cool_server" >> cool_server.txt
+case $n in
+#
+# -- PURPUR --
+#
+  1)
+    sleep 1
+
+    echo "$(tput setaf 3)Starting the download for the latest Purpur version (1.20.4), please wait"
+    mkdir plugins
+    cd plugins
+    curl -s -L -o "HibernateX.jar" "https://github.com/alex1028199/artixegg/releases/download/Hiber/HibernateX.jar" > /dev/null
+    if [ -f "HibernateX.jar" ]; then
+      echo "HibernateX downloaded successfully."
+    else
+      echo "Failed to download HibernateX."
+    fi
+    cd ..
+
+    sleep 4
+    curl -o server.jar https://api.purpurmc.org/v2/purpur/1.20.4/latest/download
+    forceStuffs
+
+    display
+
+    sleep 10
+
+    echo -e ""
+
+    optimizeJavaServer
+    launchJavaServer
+#
+# -- VELOCITY --
+#
+  2)
+    echo "$(tput setaf 3)Installing Velocity"
+
+    curl -O https://api.papermc.io/v2/projects/velocity/versions/3.3.0-SNAPSHOT/builds/389/downloads/velocity-3.3.0-SNAPSHOT-389.jar
+    mv velocity-3.3.0-SNAPSHOT-389.jar server.jar
+    display 
+
+    java -Xms512M -jar server.jar
+  ;;
+#
+# -- NODEJS --
+#
+  3)
+  echo "The NodeJS file is always index.js"
+  sleep 1
+  npm i
+  node ./index.js
+#
+# -- PYTHON --
+#
+  3)
+  echo "The python file is always index.py"
+  sleep 1
+  pip install -R requirements.txt
+  py ./index.py
+  # none
+  *) 
+    echo "Not Found"
+    exit
+  ;;
+esac  
 else
-    echo "EULA failed to apply."
+if [ -f plugins ]; then
+mkdir plugins
 fi
-
-plugins_dir="plugins"
-mkdir -p "$plugins_dir"
-cd "$plugins_dir"
-
-# Download HibernateX.jar
-echo "Downloading Dependencies..."
-curl -s -L -o "HibernateX.jar" "https://github.com/alex1028199/artixegg/releases/download/Hiber/HibernateX.jar" > /dev/null
-if [ -f "HibernateX.jar" ]; then
+if [ -d plugins ]; then
+  mkdir -p plugins
+  cd plugins
+  curl -s -L -o "HibernateX.jar" "https://github.com/alex1028199/artixegg/releases/download/Hiber/HibernateX.jar" > /dev/null
+  if [ -f "HibernateX.jar" ]; then
     echo "HibernateX downloaded successfully."
-else
+  else
     echo "Failed to download HibernateX."
+  fi
+  cd ..
 fi
-
-# Download Spark.jar
-curl -s -L -o "Spark.jar" "https://ci.lucko.me/job/spark/410/artifact/spark-bukkit/build/libs/spark-1.10.65-bukkit.jar" > /dev/null
-if [ -f "Spark.jar" ]; then
-    echo "Spark downloaded successfully."
-else
-    echo "Failed to download Spark."
+  display   
+  launchJavaServer
 fi
-
-echo "We gurantee performance, enjoy!"
-# Run Java command
-cd ..
-java -Xms128M -XX:+AlwaysPreTouch -XX:+DisableExplicitGC -XX:+UseG1GC -XX:+UnlockExperimentalVMOptions -XX:MaxGCPauseMillis=50 -XX:TargetSurvivorRatio=90 -XX:G1NewSizePercent=50 -XX:G1MaxNewSizePercent=80 -XX:InitiatingHeapOccupancyPercent=10 -XX:G1MixedGCLiveThresholdPercent=50 -jar server.jar
+fi
+fi
