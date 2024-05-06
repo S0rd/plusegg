@@ -30,9 +30,9 @@ echo "
   3) NodeJS
   4) Python
   "
-  echo "Please note that to run any NodeJS or Python servers select the docker image in the startup tab."
+  echo "Please note that to run serves select the matching docker image in startup (Java for Minecraft)."
+sleep 5
 read -r n
-echo "very_cool_server" >> cool_server.txt
 case $n in
 #
 # -- PURPUR --
@@ -60,7 +60,7 @@ case $n in
     sleep 10
 
     echo -e ""
-
+    echo "very_cool_server" >> cool_server.txt
     optimizeJavaServer
     launchJavaServer
   ;;
@@ -73,7 +73,8 @@ case $n in
     curl -O https://api.papermc.io/v2/projects/velocity/versions/3.3.0-SNAPSHOT/builds/389/downloads/velocity-3.3.0-SNAPSHOT-389.jar
     mv velocity-3.3.0-SNAPSHOT-389.jar server.jar
     display 
-
+    echo "very_cool_server" >> cool_server.txt
+    
     java -Xms512M -jar server.jar
   ;;
 #
@@ -83,21 +84,19 @@ case $n in
     echo "The NodeJS file is always index.js"
     sleep 1
     npm i
+    echo "very_cool_server" >> cool_server.txt
     node ./index.js
   ;;
 #
 # -- PYTHON --
 #
-  3)
+  4)
     echo "The python file is always index.py"
     sleep 1
     pip install -R requirements.txt
+    echo "very_cool_server" >> cool_server.txt
+
     py ./index.py
-  ;;
-  # none
-  *) 
-    echo "Not Found"
-    exit
   ;;
 esac  
 else
