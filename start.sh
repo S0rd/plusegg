@@ -80,18 +80,20 @@ case $n in
 # -- NODEJS --
 #
   3)
-  echo "The NodeJS file is always index.js"
-  sleep 1
-  npm i
-  node ./index.js
+    echo "The NodeJS file is always index.js"
+    sleep 1
+    npm i
+    node ./index.js
+  ;;
 #
 # -- PYTHON --
 #
   3)
-  echo "The python file is always index.py"
-  sleep 1
-  pip install -R requirements.txt
-  py ./index.py
+    echo "The python file is always index.py"
+    sleep 1
+    pip install -R requirements.txt
+    py ./index.py
+  ;;
   # none
   *) 
     echo "Not Found"
