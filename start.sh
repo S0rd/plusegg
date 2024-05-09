@@ -85,7 +85,7 @@ case $n in
     sleep 1
     npm i
     echo "very_cool_server" >> cool_server.txt
-    node ./index.js
+    /usr/local/bin/node index.js
   ;;
 #
 # -- PYTHON --
@@ -96,7 +96,7 @@ case $n in
     pip install -r requirements.txt
     echo "very_cool_server" >> cool_server.txt
 
-    py ./index.py
+    /usr/local/bin/python /home/container/index.py
   ;;
 esac  
 else
