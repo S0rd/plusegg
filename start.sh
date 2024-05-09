@@ -93,7 +93,7 @@ case $n in
   4)
     echo "The python file is always index.py"
     sleep 1
-    pip install -R requirements.txt
+    pip install -r requirements.txt
     echo "very_cool_server" >> cool_server.txt
 
     py ./index.py
